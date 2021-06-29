@@ -7,7 +7,7 @@ Boted_data2.txt - all generated texts; for clusterization were divided into samp
 Human_data.txt - all genuine human-written texts; for clusterization were divided into samples 4000 bytes each
 
 ## Data processing
-generator.py - generating model for bot-written text
+generator.py - generating model for bot-written text (CREDIT: https://habr.com/ru/post/470035/, minor alterations were made)
 
 vectorization.py - pre-processing and vectorization of the texts
 
