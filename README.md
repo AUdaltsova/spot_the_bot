@@ -14,6 +14,6 @@ vectorization.py - pre-processing and vectorization of the texts
 vectors2.csv - resulting table of vectors, including filenames and class tags
 
 ## Clusterization
-Spot_the_bot_K_means.ipynb - clusterization via K-means, with and witout PCA (written in R)
+Spot_the_bot_K_means.py - clusterization via K-means, with and witout PCA (written in R)
 
-Spot_the_bot_K_means - Colaboratory.pdf - copy of the .ipynb for easier access, includes graphs
+Spot_the_bot_K_means - Colaboratory.pdf - copy of the Google Colaboratory for easier access, includes graphs
