@@ -17,7 +17,9 @@ on:
 jobs:
   add-comment:
     runs-on: ubuntu-latest
-    if: ${{ !contains(github.event.issue.labels.*.name, 'contributions-welcome') && !contains(github.event.issue.labels.*.name, 'good first issue')}}
+    if: ${{ !contains(github.event.issue.labels.*.name, 'contributions-welcome') && 
+        !contains(github.event.issue.labels.*.name, 'good first issue') && 
+        !github.event.issue.pull_request }}
     permissions:
       issues: write
     steps:
