@@ -19,7 +19,7 @@ jobs:
           issues: write
     steps:
       - name: Add comment
-        run: gh issue comment "$NUMBER" --body "$BODY$echo{{github.event.issue.labels.*.name}}"
+        run: gh issue comment "$NUMBER" --body "$BODY"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
@@ -29,4 +29,4 @@ jobs:
             contribution and so hasn't been marked with "good first issue" or "contributions welcome".
             Please consult our [contribution guidelines](url), and hope to see you around!
             
-            I will now print the labels for this issue:
+            I will now print the labels for this issue: ${{github.event.issue.labels.*.name}}
