@@ -1,4 +1,7 @@
 # github.event.issue_comment.author_association != "MEMBER" &&
+#
+#      (contains(github.event.issue.labels.*.name, '<contributions-welcome>') ||
+#      contains(github.event.issue.labels.*.name, '<good first issue>'))
 
 name: Comment No Thank You
 on:
@@ -10,14 +13,13 @@ jobs:
   add-comment:
     runs-on: ubuntu-latest
     if: >
-      ${{ !github.event.issue.pull_request }} &&
-      (contains(github.event.issue.labels.*.name, '<contributions-welcome>') ||
-      contains(github.event.issue.labels.*.name, '<good first issue>'))
+      ${{ !github.event.issue.pull_request }} && 
+      ${{ !contains(github.event.*.labels.*.name, 'contributions-welcome') }} ||
     permissions:
           issues: write
     steps:
       - name: Add comment
-        run: gh issue comment "$NUMBER" --body "$BODY${{github.event.issue.labels.*.name}}"
+        run: gh issue comment "$NUMBER" --body "$BODY$echo{{github.event.issue.labels.*.name}}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
