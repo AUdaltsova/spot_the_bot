@@ -19,7 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ !contains(github.event.issue.labels.*.name, 'contributions-welcome') && 
         !contains(github.event.issue.labels.*.name, 'good first issue') && 
-        !github.event.issue.pull_request }}
+        !github.event.issue.pull_request && 
+        github.event.issue_comment.author_association != "OWNER"}}
     permissions:
       issues: write
     steps:
