@@ -1,0 +1,28 @@
+name: Comment No Thank You
+on:
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  add-comment:
+    runs-on: ubuntu-latest
+    if: >
+      github.event.issue_comment.author_association != "MEMBER" &&
+      ${{ !github.event.issue.pull_request }} && github.event.issue &&
+      contains(github.event.issue.labels.*.name, '<contributions-welcome>') ||
+      contains(github.event.issue.labels.*.name, '<good first issue>')
+    permissions:
+          issues: write
+    steps:
+      - name: Add comment
+        run: gh issue comment "$NUMBER" --body "$BODY"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}
+          BODY: >
+            Thank you for reaching out! Unfortunately, this issue is not suitable for open source 
+            contribution and so hasn't been marked with "good first issue" or "contributions welcome".
+            Please consult our [contribution guidlines](url), and hope to see you around!
+            Yours, the OCF team.
