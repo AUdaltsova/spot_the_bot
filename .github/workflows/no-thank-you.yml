@@ -4,6 +4,8 @@
 #      contains(github.event.issue.labels.*.name, '<good first issue>'))
 
 #      ${{ !github.event.issue.pull_request }} && 
+#  && ${{ !contains(github.event.issue.labels.*.name, 'good first issue') }}
+
 
 name: Comment No Thank You
 on:
@@ -14,9 +16,9 @@ on:
 jobs:
   add-comment:
     runs-on: ubuntu-latest
-    if: ${{ !contains(github.event.issue.labels.*.name, 'contributions-welcome') }} && ${{ !contains(github.event.issue.labels.*.name, 'good first issue') }}
+    if: ${{ !contains(github.event.issue.labels.*.name, 'contributions-welcome') }}
     permissions:
-          issues: write
+      issues: write
     steps:
       - name: Add comment
         run: gh issue comment "$NUMBER" --body "$BODY"
