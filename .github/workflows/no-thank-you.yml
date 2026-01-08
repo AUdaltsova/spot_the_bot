@@ -3,6 +3,8 @@
 #      (contains(github.event.issue.labels.*.name, '<contributions-welcome>') ||
 #      contains(github.event.issue.labels.*.name, '<good first issue>'))
 
+#      ${{ !github.event.issue.pull_request }} && 
+
 name: Comment No Thank You
 on:
   issue_comment:
@@ -12,9 +14,7 @@ on:
 jobs:
   add-comment:
     runs-on: ubuntu-latest
-    if: >
-      ${{ !github.event.issue.pull_request }} && 
-      ${{ !contains(github.event.*.labels.*.name, 'contributions-welcome') }} ||
+    if: ${{ !contains(github.event.issue.labels.*.name, 'contributions-welcome') }}
     permissions:
           issues: write
     steps:
@@ -29,4 +29,4 @@ jobs:
             contribution and so hasn't been marked with "good first issue" or "contributions welcome".
             Please consult our [contribution guidelines](url), and hope to see you around!
             
-            I will now print the labels for this issue: ${{github.event.issue.labels.*.name}}
+            I will now print the labels for this issue: {{github.event.issue.labels.*.name}}
