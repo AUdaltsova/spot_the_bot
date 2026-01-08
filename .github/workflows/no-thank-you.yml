@@ -14,8 +14,9 @@ on:
 jobs:
   add-comment:
     runs-on: ubuntu-latest
-    if: ${{ !contains(github.event.issue.labels.*.name, 'contributions-welcome') }} && 
-        ${{ !contains(github.event.issue.labels.*.name, 'good first issue') }}
+    if: > 
+      ${{ !contains(github.event.issue.labels.*.name, 'contributions-welcome') }} && 
+      ${{ !contains(github.event.issue.labels.*.name, 'good first issue') }}
     permissions:
           issues: write
     steps:
@@ -29,5 +30,3 @@ jobs:
             Thank you for reaching out! Unfortunately, this issue is not suitable for open source 
             contribution and so hasn't been marked with "good first issue" or "contributions welcome".
             Please consult our [contribution guidelines](url), and hope to see you around!
-            
-            I will now print the labels for this issue: {{github.event.issue.labels.*.name}}
